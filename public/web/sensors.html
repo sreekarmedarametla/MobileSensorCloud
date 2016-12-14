@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sensor Data</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/flat-ui.min.css" rel="stylesheet">
+<script type="text/javascript" src="js/constants.js"></script>
+
+</head>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		//setInterval(function() { getSensorData(userId); }, 5000);
+		getSensorData("1");
+		//var SensorData = getSensorData(userId);
+
+		$('#addSensorButton').on('click', function (e) {
+			var payload = {};
+			payload['user_id'] = '1';
+			payload['serial_number'] = $('#serialNumberInput').val();
+			payload['type'] = $('#sensorTypeInput').val();
+			payload['location'] = $('#sensorLocationInput').val();
+		    $.ajax({
+		    	type : "POST",
+		        url: "/api/sensors",
+		        data: payload,
+		        success: function (response) {
+		            //alert('response received');
+		            $('#addSensorModal').modal('hide')
+		            getSensorData("1");
+		            // ajax success callback
+		        },
+		        error: function (response) {
+		            alert('invalid sensor');
+		            // ajax error callback
+		        },
+		    });
+		})
+	});
+	function getSensorData(userId) {
+		var reqData = {
+			"user_id" : userId
+		};
+		var reqUrl = "/api/sensors?user_id=1"
+		$.ajax({
+			type : "GET",
+			url : reqUrl,
+			//data : JSON.stringify(reqData),
+			dataType : "json",
+			contentType : "application/json",
+			success : function(result) {
+				//alert(typeof(data));
+				//alert(JSON.stringify(data[0]));
+				createGrid(result);
+			}
+		});
+	}
+
+	function createGrid(data) {
+		var tableStartElements = "<table class=\"table table-striped\" id=\"sensor_data\">"
+				+ "<thead><tr>"
+				+ "<th>Sensor Id</th>"
+				+ "<th>Type</th>"
+				+ "<th>Group Id</th>"
+				+ "<th>Status</th>"
+				+ "<th>Location</th>"
+				+ "<th>Serial Number</th>"
+				+ "<th>Register Time</th>" + "</tr></thead>";
+		var sensordata = "";
+		var jsonObj = data;
+		//var length = jsonObj.length;
+		for (var i = 0; i < jsonObj.length; i++) {
+			//alert(jsonObj[i]["sensordataid"]); 
+			sensordata += "<tr><td>" + jsonObj[i]["id"] + "</td>"
+					+ "<td>" + jsonObj[i]["type"] + "</td>" + "<td>"
+					+ jsonObj[i]["group_id"] + "</td>" + "<td>"
+					+ jsonObj[i]["status"] + "</td>" + "<td>"
+					+ jsonObj[i]["location"] + "</td>" + "<td>" + jsonObj[i]["serial_number"]
+					+ "</td>" + "<td>" + jsonObj[i]["register_time"] + "</td>" + "</tr>";
+		}
+		var tableEndElements = "</table>";
+		var sensordatatable = document.getElementById('sensordatagrid');
+		sensordatatable.innerHTML = tableStartElements + sensordata
+				+ tableEndElements;
+
+	}
+</script>
+<body>
+	<div>
+		<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:rgb(128, 128, 128);color:white">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Daisy Sensor
+						Cloud</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="sensors.html">Sensor Management</a></li>
+						<li><a href="ScheduleDataCollection.html">Dashboard</a></li>
+						<li><a href="Billing.html">Billing</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div class="container" style="padding-top: 70px;">
+		<h3>Your Sensors</h3>
+		<div id="sensordatagrid"></div>
+
+		<!-- Button trigger modal -->
+		<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addSensorModal">
+		    Add Sensor
+		</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="addSensorModal" tabindex="-1" role="dialog" 
+		     aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <!-- Modal Header -->
+		            <div class="modal-header">
+		                <button type="button" class="close" 
+		                   data-dismiss="modal">
+		                       <span aria-hidden="true">&times;</span>
+		                       <span class="sr-only">Close</span>
+		                </button>
+		                <h4 class="modal-title" id="myModalLabel">
+		                    New Sensor
+		                </h4>
+		            </div>
+		            
+		            <!-- Modal Body -->
+		            <div class="modal-body">
+		                
+		                <form id="addSensorForm" role="form">
+		                  <div class="form-group">
+		                    <label for="">Serial Number</label>
+		                      <input type="" class="form-control"
+		                      id="serialNumberInput" placeholder=""/>
+		                  </div>
+		                  <div class="form-group">
+		                    <label for="">Type</label>
+		                      <input type="" class="form-control"
+		                          id="sensorTypeInput" placeholder=""/>
+		                  </div>
+		                  <div class="form-group">
+		                    <label for="">Location</label>
+		                      <input type="" class="form-control"
+		                          id="sensorLocationInput" placeholder=""/>
+		                  </div>
+		                </form>
+		                
+		                
+		            </div>
+		            
+		            <!-- Modal Footer -->
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default"
+		                        data-dismiss="modal">
+		                            Close
+		                </button>
+		                <button id="addSensorButton" type="button" class="btn btn-primary">
+		                    Add
+		                </button>
+		            </div>
+		        </div>
+        </div>
+    </div>
+
+</body>
+</html>

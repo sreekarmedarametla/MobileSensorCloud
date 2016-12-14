@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-min.js"></script>
+<script type="text/javascript" src="js/polyfill.js"></script>
+<script type="text/javascript" src="js/constants.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/flat-ui.min.css" rel="stylesheet">
+
+<script type="text/javascript" src="js/insert.js"></script>
+<style type="text/css">
+.map_container{
+    position: relative;
+    width: 100%;
+    height: 500px;
+    padding-bottom: 56.25%; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
+}
+.map_container .map_canvas{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+	<div>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Air Quality Mobile Sensor
+						Cloud</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li><a href="adminindex.html">Home</a></li>
+						<li class="active"><a href="adminNewSensor.html">New
+								Sensor</a></li>
+						<li><a href="adminNewController.html">New Controller</a></li>
+						<li><a href="ShowSensorNetwork.html">Show Sensor Network</a></li>
+						<li><a href="ViewSensorDataAdmin.html">Pull Sensor Data</a></li>
+						<li><a href="admininstanceindex.html">VInstances</a></li> 
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div class="container" style="padding-top: 70px;">
+		<div class="jumbotron">
+			<h2>Create New Sensor</h2>
+		</div>
+	
+	<div class="row">
+	<div class="col-md-6 col-md-offset-0">
+		<form role="form" action="#" method="post" id="new_sensor_form">
+			Sensor Location:<br> <select class="form-control"
+				name="sensor_location" id="sensor_location">
+			</select>
+			<div class="form-group">
+				<label for="sensorid">Sensor ID:</label> <input type="number"
+					class="form-control" name="sensorID" value="0" id="sensorID">
+			</div>
+			<div class="form-group">
+				<label for="sensorSerial">Sensor Serial:</label> <input type="text"
+					class="form-control" name="sensorSerial" value="0"
+					id="sensorSerial">
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary" type="submit" id="submit_new_sensor">Submit</button>
+			</div>
+		</form>
+		<div id="div_ajaxResponse"></div>
+	</div>
+	<div class=" col-md-6"><div  id="mymap" class="map_container"></div></div>
+	
+	</div>
+	</div>
+</body>
+</html>

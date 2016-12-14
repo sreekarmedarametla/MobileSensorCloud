@@ -1,0 +1,59 @@
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <div class="container">
+    
+    <br> <br> <br> <br> <br> 
+    <right>
+   
+<form class="navbar-form navbar-left" role="search">
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search"  ng-model="nameFilter">
+    </div>
+    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+</form>
+
+
+<table class="table table-striped">
+<thead>
+<tr>
+
+<th>Index</th>
+
+
+
+<th>Instance ID</th>
+
+<th>User ID</th>
+
+</tr>
+
+<tr ng-repeat="instance in array|filter:nameFilter">
+
+<td>{{$index + 1}}</td>
+
+<!-- <td><img ng-src="img/{{instance.StreetName}}.png" height="40"
+
+width="40" /></td>-->
+
+
+<td><a href="#/instances/{{instance.Instanceid}}">{{instance.Instanceid}}</a></td>
+
+<td>{{instance.Userid}}</td>
+
+
+
+</tr>
+</thead>
+
+</table>
+
+</center>
+    
+    
+   <ul class = "pager">
+   <li><a href = "#">Previous</a></li>
+   <li><a href = "#">Next</a></li>
+</ul> 
+</div>

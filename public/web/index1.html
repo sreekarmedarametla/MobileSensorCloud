@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sensor Cloud</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/flat-ui.min.css" rel="stylesheet">
+
+</head>
+<body>
+	</body>
+</html>
+
+        $.ajax({
+        	type : "POST",
+            url: '/api/sensors',
+            data: payload,
+            contentType : "application/json",
+            success: function (response) {
+                //alert('response received');
+                $('#addSensorModal').modal('hide')
+                getSensorData("1");
+                // ajax success callback
+            },
+            error: function (response) {
+                alert('invalid sensor');
+                // ajax error callback
+            },
+        });

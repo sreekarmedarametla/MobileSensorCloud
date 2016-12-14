@@ -1,0 +1,162 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- CSS ===================== -->
+<!-- load bootstrap -->
+<style>
+body {
+	padding-top: 30px;
+}
+</style>
+
+
+
+
+
+<!-- JS ===================== -->
+<!-- load angular -->
+
+<script src="http://code.angularjs.org/1.2.6/angular.js"></script>
+<script src="js/controller.js"></script>
+<script src="js/constants.js"></script>
+<script src="js/angular-datepicker.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/custom.css">
+<link href="css/flat-ui.min.css" rel="stylesheet">
+
+
+
+<link href="js/angular-datepicker.css" rel="stylesheet">
+
+
+
+</head>
+
+<!-- apply angular app and controller to our body -->
+<body ng-app="SensorRequestApp" ng-controller="RequestController">
+<div>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Air Quality Mobile Sensor
+						Cloud</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li><a href="ViewSensorData.html">View Sensor Data</a></li>
+						<li class="active"><a href="usersensorrequest.html">Request Sensors</a></li>
+						<li><a href="ViewSensorAllocation.html">View Sensor
+								Allocation</a></li>
+						<li><a href="ScheduleDataCollection.html">Scheduling</a></li>
+						<li><a href="Billing.html">Billing</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div>
+		<div class="container">
+			<div class="col-sm-8 col-sm-offset-2">
+				<div class="row">
+					<hr />
+					
+
+					<h3>Thank You for using our Services</h3>
+					<h3>Please fill the below details inorder to process your
+						request!!</h3>
+					<!-- FORM -->
+					<!-- pass in the variable if our form is valid or invalid -->
+					<form name="userForm" ng-submit="submitForm(userForm.$valid)"
+						novalidate>
+						<!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+
+
+						<!-- Location -->
+						<fieldset data-ng-repeat="choice in choices">
+							<div class="dropdown">
+
+
+
+
+								<label>Location of Sensor</label>
+								<div class="form-group"
+									ng-class="{ 'has-error' : userForm.locationofsensor.$invalid && !userForm.locationofsensor.$pristine }">
+									<input type="hidden" name="locationofsensor" class="form-control"
+										ng-value="" ng-model="choice.location"
+										placeholder="Please Specify Location" required> <select
+										class="form-control"
+										ng-model="choice.location">
+										<option ng-repeat="a in locationnames">{{a.ControllerName}}</option>
+
+									</select>
+									<p
+										ng-show="userForm.locationofsensor.$invalid && !userForm.locationofsensor.$pristine"
+										class="help-block">Please specify the location.</p>
+								</div>
+
+
+							<label>No of Sensors</label> <input type="text"
+								name="noofinstances" class="form-control"
+								ng-model="choice.numberofsensors"
+								placeholder="Enter number of sensors" required>
+							<p
+								ng-show="userForm.noofinstances.$invalid && !userForm.noofinstances.$pristine"
+								class="help-block">No of instances is required.</p>
+
+
+							<div class="form-group"
+								ng-class="{ 'has-error' : userForm.startdate.$invalid && !userForm.startdate.$pristine }">
+								<label>When do you require?</label>
+								<datepicker date-format="yyyy-MM-dd"> <input
+									ng-model="choice.date" name="startdate" type="text"
+									class="form-control" required />
+								<p
+									ng-show="userForm.startdate.$invalid && !userForm.startdate.$pristine"
+									class="help-block">Please Specify the date.</p>
+								</datepicker>
+								<button class="btn btn-danger btn-md center-block" ng-show="$last"
+								ng-click="removeChoice()">Remove</button>
+						
+							</div></fieldset>
+
+							
+
+
+						<button class="btn btn-info btn-md left-block" ng-click="addNewChoice()">Add
+							New Location</button>
+
+						<br> <br>
+
+						<!-- When do you want  -->
+
+
+						<!-- Checkbox -->
+						<label><a href="Terms & Conditions"> Terms &
+								Conditions</a></label>
+						<div class="form-group">
+							<label class="checkbox-inline"> <input type="checkbox"
+								name="favoriteColors" ng-model="select.isSelected"> I
+								hereby accept the terms and conditions
+							</label>
+
+						</div>
+
+						<!-- SUBMIT BUTTON -->
+						<button  type="submit" class="btn btn-primary" ng-click="Add()"
+							ng-disabled="!select.isSelected">Submit</button>
+
+					</form>
+					
+
+				</div>
+			</div>
+			<!-- col-sm-8 -->
+		</div>
+		<!-- jumbotron -->
+	</div>
+	<!-- /container -->
+</body>
+</html>

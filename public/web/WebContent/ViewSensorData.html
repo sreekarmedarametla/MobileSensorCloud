@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>View Sensor Data</title>
+<script type="text/javascript" src="js/jquery-min.js"></script>
+<script type="text/javascript" src="js/polyfill.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/flat-ui.min.css" rel="stylesheet">
+<script type="text/javascript" src="js/constants.js"></script>
+
+</head>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var userId = sessionStorage.getItem('useridvalue');
+		setInterval(function() { getSensorData(userId); }, 5000);
+		//var SensorData = getSensorData(userId);
+	});
+	function getSensorData(userId) {
+		var reqData = {
+			"userid" : userId
+		};
+		var reqUrl = Constants.getInstance().getsensordataforuser;
+		$.ajax({
+			type : "POST",
+			url : reqUrl,
+			data : JSON.stringify(reqData),
+			dataType : "json",
+			contentType : "application/json",
+			success : function(data) {
+				//alert(typeof(data));
+				//alert(JSON.stringify(data[0]));
+				createGrid(data);
+			}
+		});
+	}
+
+	function createGrid(data) {
+		var tableStartElements = "<table class=\"table table-striped\" id=\"sensor_data\">"
+				+ "<thead><tr>"
+				+ "<th>Instance Id</th>"
+				+ "<th>Sensor Id</th>"
+				+ "<th>Controller Name</th>"
+				+ "<th>Created Date</th>"
+				+ "<th>NO2</th>"
+				+ "<th>CO</th>"
+				+ "<th>Temperature</th>"
+				+ "<th>Humidity</th>" + "</tr></thead>";
+		var sensordata = "";
+		var jsonObj = $.parseJSON('[' + data + ']');
+		//var length = jsonObj.length;
+		for (var i = 0; i < jsonObj.length; i++) {
+			//alert(jsonObj[i]["sensordataid"]); 
+			sensordata += "<tr><td>" + jsonObj[i]["instanceid"] + "</td>"
+					+ "<td>" + jsonObj[i]["sensorid"] + "</td>" + "<td>"
+					+ jsonObj[i]["controllername"] + "</td>" + "<td>"
+					+ jsonObj[i]["createddate"] + "</td>" + "<td>"
+					+ jsonObj[i]["no2"] + "</td>" + "<td>" + jsonObj[i]["co"]
+					+ "</td>" + "<td>" + jsonObj[i]["temp"] + "</td>" + "<td>"
+					+ jsonObj[i]["humidity"] + "</td>" + "</tr>";
+		}
+		var tableEndElements = "</table>";
+		var sensordatatable = document.getElementById('sensordatagrid');
+		sensordatatable.innerHTML = tableStartElements + sensordata
+				+ tableEndElements;
+
+	}
+</script>
+<body>
+	<div>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Air Quality Mobile Sensor
+						Cloud</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="ViewSensorData.html">View Sensor Data</a></li>
+						<li><a href="usersensorrequest.html">Request Sensors</a></li>
+						<li><a href="ViewSensorAllocation.html">View Sensor
+								Allocation</a></li>
+						<li><a href="ScheduleDataCollection.html">Scheduling</a></li>
+						<li><a href="Billing.html">Billing</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div class="container" style="padding-top: 70px;">
+		<h3>View Sensor Data</h3>
+		<div id="sensordatagrid"></div>
+	</div>
+</body>
+</html>

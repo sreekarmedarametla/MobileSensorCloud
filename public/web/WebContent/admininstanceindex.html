@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+      <meta charset="utf-8">
+      <title>AngularJS Routing</title>
+ 
+    </head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
+      <script src="js/constants.js"></script>
+     <script type="text/javascript" src="js/controller1.js"></script>
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+ 	<link href="css/bootstrap.min.css" rel="stylesheet">
+ 	<link href="css/flat-ui.min.css" rel="stylesheet">
+   
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Air Quality Mobile Sensor Cloud</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="#">Home</a></li>
+        <li><a href="adminNewSensor.html">New Sensor</a></li>
+        <li><a href="adminNewController.html">New Controller</a></li> 
+        <li><a href="ShowSensorNetwork.html">Show Sensor Network</a></li> 
+        <li><a href="ViewSensorDataAdmin.html">Pull Sensor Data</a></li>
+        <li class="active"><a href="admininstanceindex.html">VInstances</a></li> 
+      </ul>
+    </div>
+  </div>
+</nav>
+ 
+      <div ng-app="InstanceApp">
+        <ng-view></ng-view>
+      </div>
+ 
+       
+     
+      
+     
+        
+
+
+        
+        
+    </body>
+</html>

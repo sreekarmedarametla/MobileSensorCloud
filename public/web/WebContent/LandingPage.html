@@ -1,0 +1,64 @@
+<!doctype html>
+
+<html>
+<head>
+<link href="/css/hover-min.css" rel="stylesheet" media="all">
+</head>
+<body>
+	<!-- NOTE: This page uses a lot of inline styling that should be moved to separate css file -->
+	<div id ="slider">
+		<article id ="articleone" class = "art show" style = "background-image: url(https://newevolutiondesigns.com/images/freebies/city-wallpaper-47.jpg); background-attachment: scroll;">
+			<div id = "title">
+				<h1 class ="Landingtext">
+				<!--<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/SAP-Logo.svg/2000px-SAP-Logo.svg.png" height = 100 width = 200>-->
+				<span style="color:#F88017; font-size:70px;">Air</span><span style="font-size:50px;font-weight:500;color:mediumblue"> Control System</span></h1>
+			</div>
+		</article>
+		<article id ="articletwo" class = "art show" style="background-image: url(https://www.interactivebrokers.com/images/2015/section_global_access.jpg)">
+			<div id = "title">
+				<h1 class ="centertext">
+					Search, create and host your sensors with the power of the cloud
+				</h1>
+				<p style="padding-top:0;"class="centertext">We virtualize millions of sensors devices and visualize their data it in a meaningful way</p>
+			</div>
+		</article>
+		<article id ="articlefour" class = "art show" style="display:inline-block; background-image: url(https://wallpaperscraft.com/image/laptop_room_on_the_desk_keyboard_mouse_apple_window_interior_73963_3840x1200.jpg)">
+		<!--<img class="fadeInBlock" style ="float: right; padding-right: 20px; padding-top: 15%;" src = "" width = "650px" height = "600px">-->
+		<div class="fadeInBlock" id = "datavistext" style="width: 30%">
+			<h1>Beautiful Data Visualizations</h1>
+			<p style="padding-top: 20px;">Exciting dynamic charts created with <a href="http://www.chartjs.org/"> <b>ChartJS<b> <img src = "http://www.chartjs.org/img/chartjs-logo.svg" width = "35px" height = "30px"></a>. You can see ... </p>
+			<ul>
+				<li>Live Sensor Data</li>
+				<li>Disk Utilization</li>
+				<li>CPU Utilization</li>
+				<li>Billing</li>
+				<li>And more...</li>
+			</ul>
+			<h1 style="padding-top: 20px;">Don't have a sensor? No Problem</h1>
+			<p style="padding-top: 20px;">The number of sensors we host every day is enourmous</p>
+			<p>We use sensor virtualization techniques and a highly scalable <a href="http://www.chartjs.org/"><img src = "https://platform-user-uploads.s3.amazonaws.com/blog/category/logo/106/C.png" width = "55px" height = "50px"></a> platform to help us.</p>
+			<ul>
+				<li>Highly scalable</li>
+				<li>Fast</li>
+				<li>Built in fault tolerance</li>
+				<li>Store terabytes of data</li>
+			</ul>
+		</div>
+		</article>
+		<!--<article id ="articlethree" class = "art" style="height: 400px; background-image: url(https://www.interactivebrokers.com/images/2015/section_trading_technology.jpg)">-->
+		<!--</article>-->
+		<article id = "articlefive" class = "art show" style = "background-color: white; background-attachment: scroll; display:inline-block; background-image: url(https://newevolutiondesigns.com/images/freebies/city-wallpaper-11.jpg) ">
+			<a href='signIn.html' class="fadeInBlock btn btn-default hvr-bounce-to-right" id ="starthere">Start Here  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+		</article>
+	</div>
+	<div id = "footer">
+		<a class = "btn backtotop"><span class ="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></a>
+	</div>
+	<script>
+		//scroll back to top of page when clicking the back to top button
+		$(".backtotop").on("click", function(){
+			$('html,body').animate({scrollTop:0},"slow");
+		})
+	</script>
+</body>
+</html>

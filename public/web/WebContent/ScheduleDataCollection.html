@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-min.js"></script>
+<script type="text/javascript" src="js/polyfill.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/constants.js"></script>
+<script type="text/javascript" src="js/scheduler.js"></script>
+ <link href="css/bootstrap.min.css" rel="stylesheet">
+ <link href="css/flat-ui.min.css" rel="stylesheet">
+ 
+</head>
+<body>
+<div>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Air Quality Mobile Sensor
+						Cloud</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li><a href="ViewSensorData.html">View Sensor Data</a></li>
+						<li><a href="usersensorrequest.html">Request Sensors</a></li>
+						<li><a href="ViewSensorAllocation.html">View Sensor
+								Allocation</a></li>
+						<li class="active"><a href="ScheduleDataCollection.html">Scheduling</a></li>
+						<li><a href="Billing.html">Billing</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+<div class ="container" style="padding:53px">
+<h3>Schedule Data Collection</h3>	
+<form id="new_schedule" action ="#" method="post">
+<div class="form-group">
+    <input class="form-control" type="hidden" name="userid" id="userid" hidden="true">
+  </div>
+  <div class="form-group">
+    <label for="SensorID">SensorID</label>
+    <select class="form-control" id="allocated_sensors" name="allocated_sensors">
+</select>
+  </div>
+  <div class="form-group">
+    <label for="datetime">Date Time</label>
+    <input type="datetime-local" name="datetime" id="datetime">
+  </div>
+  <button type="submit" class="btn btn-primary" id="submit_schedule">Submit</button>
+</form>
+<div id="div_ajaxResponse"></div>
+<h3>Your Current Schedule</h3>
+<table class="table table-striped" id="schedule_data">
+<thead>
+      <tr>
+      	<th>#</th>
+        <th>Time</th>
+        <th>Sensor ID</th>
+      </tr>
+    </thead>
+</table>
+</div>
+</body>
+</html>

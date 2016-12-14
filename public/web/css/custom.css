@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+
+.jumbotron {
+    /* add bootstrap jumbotron background image */
+    background: url("images/SensorRequest.jpg");
+    /* change bootstrap jumbotron text color */
+    color:;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-min.js"></script>
+<script type="text/javascript" src="js/polyfill.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/constants.js"></script>
+ <link href="css/bootstrap.min.css" rel="stylesheet">
+ <link href="css/flat-ui.min.css" rel="stylesheet">
+ 
+ <script type="text/javascript" src="js/getsensordata.js"></script>
+ 
+</head>
+<body >
+<div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Air Quality Mobile Sensor Cloud</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="adminindex.html">Home</a></li>
+        <li><a href="adminNewSensor.html">New Sensor</a></li>
+        <li><a href="adminNewController.html">New Controller</a></li> 
+        <li><a href="ShowSensorNetwork.html">Show Sensor Network</a></li> 
+        <li class="active"><a href="ViewSensorDataAdmin.html">Pull Sensor Data</a></li>
+        <li><a href="admininstanceindex.html">VInstances</a></li>  
+      </ul>
+    </div>
+  </div>
+</nav>
+</div>
+<div style="padding-top: 54px;background:white" >
+<div style="position:fixed;background:white;width:100%;z-index: 1020">
+<div class="progress">
+  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+   aria-valuemin="0" aria-valuemax="500" style="width:0%" id="no2">
+    NO2
+  </div>
+</div>
+
+<div class="progress">
+  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+  aria-valuemin="0" aria-valuemax="40" style="width:0%" id="co">
+    CO
+  </div>
+</div>
+
+<div class="progress">
+  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+   aria-valuemin="0" aria-valuemax="100" style="width:0%" id="temp">
+    Temperature
+  </div>
+</div>
+
+<div class="progress">
+  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+  aria-valuemin="0" aria-valuemax="100" style="width:0%" id="humidity">
+    Humidity
+  </div>
+</div>
+</div>
+<div class="container" style="padding-top:7em">
+  <h2>Pull Data from Sensors</h2>
+<table class="table table-striped" id="sensor_data">
+<thead>
+      <tr>
+        <th>Controller</th>
+        <th>Sensors</th>
+        <th>Sensor Data</th>
+      </tr>
+    </thead>
+</table>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>View Sensor Data</title>
+<script type="text/javascript" src="js/jquery-min.js"></script>
+<script type="text/javascript" src="js/polyfill.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/flat-ui.min.css" rel="stylesheet">
+<script type="text/javascript" src="js/constants.js"></script>
+
+</head>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var userId = sessionStorage.getItem('useridvalue');
+		getBillingDetails(userId, 11, 2015);
+	});
+	function getBillingDetails(userId, month, year) {
+		var reqData = {
+			"userid" : userId,
+			"month" : 11,
+			"year" : 2015,
+		};
+		var reqUrl = Constants.getInstance().getbillingdetails;
+		$.ajax({
+			type : "POST",
+			url : reqUrl,
+			data : JSON.stringify(reqData),
+			dataType : "json",
+			contentType : "application/json",
+			success : function(data) {
+				createGrid(data);
+				//alert(JSON.stringify(data));
+			}
+		});
+	}
+
+	function createGrid(data) {
+		var tableStartElements = "<table class=\"table table-striped\" id=\"billing_data\">"
+				+ "<thead><tr>"
+				+ "<th>Instance Id</th>"
+				+ "<th>Sensor Id</th>"
+				+ "<th>Hours Used</th>"
+				+ "<th>Rate(per Hr)</th>"
+				+ "<th>Amount</th>" + "</tr></thead>";
+		var billingdata = "";
+		var jsonObj = $.parseJSON('[' + data + ']');
+		var subTotal = 0;
+		//var length = jsonObj.length;
+		for (var i = 0; i < jsonObj.length; i++) {
+			//alert(jsonObj[i]["sensordataid"]); 
+			billingdata += "<tr><td>" + jsonObj[i]["instanceid"] + "</td>"
+					+ "<td>" + jsonObj[i]["sensorid"] + "</td>" + "<td>"
+					+ jsonObj[i]["hrsused"] + "</td>" + "<td>"
+					+ jsonObj[i]["rate"] + "</td>" + "<td>"
+					+ jsonObj[i]["amount"] + "</td>" + "</tr>";
+			subTotal += jsonObj[i]["amount"];
+		}
+		subTotal = subTotal.toFixed(2);
+		var tableEndElements = "</table>";
+
+		var subTotalElements = "<tr><td><//td><td><//td><td><//td><th><//th><th><//th><//tr> <tr><td><//td><td><//td><td><//td><th>Sub Total: <//th><th>$"
+				+ subTotal + "<//th><//tr>";
+		var taxElements = "<tr><td><//td><td><//td><td><//td><th>TAX: <//th><th>NA<//th><//tr>";
+		var totalElements = "<tr><td><//td><td><//td><td><//td><th>Total: <//th><th>$"
+				+ subTotal + "<//th><//tr>";
+		var billingdatatable = document.getElementById('billingdatagrid');
+		billingdatatable.innerHTML = tableStartElements + billingdata
+				+ subTotalElements + taxElements + totalElements
+				+ tableEndElements;
+
+	}
+</script>
+<body>
+	<div>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Air Quality Mobile Sensor
+						Cloud</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li><a href="ViewSensorData.html">View Sensor Data</a></li>
+						<li><a href="usersensorrequest.html">Request Sensors</a></li>
+						<li><a href="ViewSensorAllocation.html">View Sensor
+								Allocation</a></li>
+						<li><a href="ScheduleDataCollection.html">Scheduling</a></li>
+						<li class="active"><a href="Billing.html">Billing</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div class="container" style="padding-top: 70px;">
+		<h3>Billing</h3>
+		<div id="billingdatagrid"></div>
+	</div>
+</body>
+</html>
